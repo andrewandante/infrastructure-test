@@ -40,7 +40,19 @@ POLICY
 resource "aws_iam_policy_attachment" "example_bucket" {
   name       = "example_bucket_${var.environment}-attachment"
   policy_arn = "${aws_iam_policy.example_bucket_policy.arn}"
-  users      = [
-    "${aws_iam_user.example_bucket_user.name}"
+
+  users = [
+    "${aws_iam_user.example_bucket_user.name}",
   ]
+}
+
+resource "aws_instance" "example_instance" {
+  ami           = "ami-971238f1"
+  instance_type = "t2.nano"
+  key_name      = "${aws_key_pair.example_test.key_name}"
+}
+
+resource "aws_key_pair" "example_test" {
+  key_name   = "example_test"
+  public_key = "${var.public_key}"
 }

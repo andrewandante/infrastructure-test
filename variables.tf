@@ -1,3 +1,3 @@
-variable "environment" {
-  default = "sandbox"
-}
+variable "environment" {}
+
+variable "public_key" {}
